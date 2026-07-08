@@ -30,14 +30,16 @@ installed.
 
 | # | Lesson | ~min | Open in Colab |
 |---|--------|------|:-------------:|
+| 00 | Database foundations (concepts) | 20 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/00_database_foundations.ipynb) |
 | 01 | Meet the database & first SELECT | 30 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/01_select_basics.ipynb) |
 | 02 | Filtering rows (WHERE) | 30 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/02_filtering_where.ipynb) |
 | 03 | Sorting, limiting & computed columns | 25 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/03_sort_compute.ipynb) |
 | 04 | Aggregation (GROUP BY) | 40 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/04_aggregation_groupby.ipynb) |
 | 05 | Joining tables (JOIN) | 45 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/05_joins.ipynb) |
 | 06 | Subqueries & CTEs | 30 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/06_subqueries_ctes.ipynb) |
-| 07 | Hands-on capstone | 45 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/07_capstone.ipynb) |
-| 08 | *Bonus* — creating & changing data | 20 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/08_creating_changing_data.ipynb) |
+| 07 | Complete & complex queries | 40 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/07_advanced_analysis.ipynb) |
+| 08 | Hands-on capstone | 45 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/08_capstone.ipynb) |
+| 09 | *Bonus* — creating & changing data | 20 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andersonavilasantos/ufz-summerschool-sql/blob/main/notebooks/09_creating_changing_data.ipynb) |
 
 ### Option B — DB Browser for SQLite (a friendly visual app)
 
@@ -51,9 +53,12 @@ tab, and paste queries from the matching **`sql/…​.sql`** file (one per less
 sqlite3 data/omics.db < sql/01_select_basics.sql
 ```
 
-Every lesson opens with **learning objectives**, is full of runnable, commented
+Lesson **00** gives the conceptual base (relational model, keys, what SQL is);
+lessons **01–06** build query skills; **07** puts them together into complete,
+realistic analytical queries; **08** is the fill-in hands-on capstone. Every
+lesson opens with **learning objectives**, is full of runnable, commented
 queries, has **exercises with collapsible solutions**, and closes with a
-**recap**. Total is ~4 h (lessons 01–07); lesson 08 is an optional bonus.
+**recap**. Total is ~4 h (lessons 00–08); lesson 09 is an optional bonus.
 
 ---
 
@@ -99,7 +104,7 @@ SQL 2026/
 ├── LICENSE
 ├── .gitignore
 ├── data/        omics.db + CSV exports + schema.sql + build_database.py
-├── notebooks/   01–07 core lessons, 08 bonus (JupySQL, Colab-ready)
+├── notebooks/   00 foundations, 01–08 core lessons, 09 bonus (JupySQL, Colab-ready)
 └── sql/         one .sql script per lesson (for DB Browser / sqlite3 CLI)
 ```
 

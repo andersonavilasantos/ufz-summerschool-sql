@@ -1,4 +1,4 @@
 -- ============================================================
--- 07 · Hands-on capstone — a mini analysis in SQL
+-- 08 · Hands-on capstone — a mini analysis in SQL
 -- capstone
 -- ============================================================
