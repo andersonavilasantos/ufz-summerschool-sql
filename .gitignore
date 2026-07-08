@@ -1,0 +1,17 @@
+# Python / Jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Google Colab clone target (created by the setup cell)
+course_repo/
+
+# SQLite transient files (the database itself IS committed)
+*.db-journal
+*.db-wal
+*.db-shm
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
