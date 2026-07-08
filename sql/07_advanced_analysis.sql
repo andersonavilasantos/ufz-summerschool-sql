@@ -23,6 +23,19 @@ FROM ranked
 WHERE rnk = 1
 ORDER BY sample_id;
 
+-- most abundant phylum in each environment (dense_rank keeps 1,2,2,3...)
+WITH ep AS (
+    SELECT s.environment, t.phylum, SUM(a.count) AS reads,
+           DENSE_RANK() OVER (PARTITION BY s.environment ORDER BY SUM(a.count) DESC) AS rnk
+    FROM abundance a
+    JOIN samples s ON a.sample_id = s.sample_id
+    JOIN taxa t    ON a.taxon_id  = t.taxon_id
+    GROUP BY s.environment, t.phylum
+)
+SELECT environment, phylum, reads FROM ep
+WHERE rnk = 1
+ORDER BY environment;
+
 WITH env_phylum AS (
     SELECT s.environment, t.phylum, SUM(a.count) AS reads
     FROM abundance a
@@ -51,6 +64,16 @@ JOIN taxa t    ON a.taxon_id  = t.taxon_id
 GROUP BY t.phylum
 ORDER BY amended_vs_control DESC;
 
+-- Soil vs. Freshwater reads per phylum in one row each (conditional SUM)
+SELECT t.phylum,
+       SUM(CASE WHEN s.environment = 'Soil' THEN a.count ELSE 0 END) AS soil_reads,
+       SUM(CASE WHEN s.environment = 'Freshwater' THEN a.count ELSE 0 END) AS freshwater_reads
+FROM abundance a
+JOIN samples s ON a.sample_id = s.sample_id
+JOIN taxa t    ON a.taxon_id  = t.taxon_id
+GROUP BY t.phylum
+ORDER BY soil_reads DESC;
+
 SELECT t.genus,
        COUNT(DISTINCT a.sample_id) AS n_samples,
        ROUND(AVG(a.count), 1) AS mean_when_present,
@@ -60,3 +83,9 @@ JOIN taxa t ON a.taxon_id = t.taxon_id
 GROUP BY t.genus
 HAVING n_samples >= 20
 ORDER BY total_reads DESC;
+
+-- write your query here
+
+-- write your query here
+
+-- write your query here
