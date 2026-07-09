@@ -8,46 +8,45 @@ Ecology and Biotechnology"* — UFZ, Leipzig.
 
 ---
 
-## 👋 Welcome
+## Welcome
 
-This is a **beginner SQL course built for biologists** — you need **no prior
-database or programming experience** at all. It is hands-on and query-driven
-(**no slides**): you write SQL from the very first minute. We start from *"what is
-a table?"* and build up to multi-table `JOIN`s and a complete mini-analysis of a
-**relational microbial-ecology database**.
+This is a beginner SQL course built for biologists. You need no prior database or
+programming experience. It is hands-on and query-driven (no slides): you write SQL
+from the first minute. We start from *"what is a table?"* and build up to
+multi-table `JOIN`s and a complete mini-analysis of a relational microbial-ecology
+database.
 
-All data are **synthetic** (no licensing issues) but shaped like a real amplicon
-study, with a built-in ecological signal so your queries reveal real patterns.
+All data are synthetic (no licensing issues) but shaped like a real amplicon
+study, with a built-in ecological signal, so your queries reveal real patterns.
 
-**By the end of the session you will be able to:**
+By the end of the session you will be able to:
 
-- read the **schema** of a relational database and understand keys and links;
+- read the schema of a relational database and understand keys and links;
 - retrieve and filter data with `SELECT`, `WHERE`, `ORDER BY`, `LIMIT`;
-- summarise data with **`GROUP BY`** and aggregate functions (`COUNT`, `SUM`, `AVG`);
-- combine tables with **`JOIN`** — the heart of relational analysis;
-- write **complete, realistic queries** (subqueries, CTEs, window functions);
+- summarise data with `GROUP BY` and aggregate functions (`COUNT`, `SUM`, `AVG`);
+- combine tables with `JOIN`, the core of relational analysis;
+- write complete, realistic queries (subqueries, CTEs, window functions);
 - answer real biological questions with SQL in a guided capstone.
 
-> This SQL session is the companion to the parallel **Python** and **R**
-> refreshers. Each uses a **different dataset** and plays to that tool's strengths;
-> SQL is where the *relational* thinking (tables linked by keys) comes to life.
+> This SQL session is the companion to the parallel Python and R refreshers. Each
+> uses a different dataset and plays to that tool's strengths. SQL is where
+> relational thinking, tables linked by keys, comes to life.
 
 ---
 
-## ✅ Prerequisites — none
+## Prerequisites — none
 
-You do **not** need to know SQL, any programming, or databases to follow this
-session. If you can open a web browser, you can do this. Everything you need is
-either already available (Google Colab) or a single free app (DB Browser for
-SQLite).
+You do not need to know SQL, any programming, or databases to follow this session.
+If you can open a web browser, you can do this. Everything you need is either
+already available (Google Colab) or a single free app (DB Browser for SQLite).
 
-Decide only *how* you want to run the lessons — see
-**[How to run](#-how-to-run-the-lessons)**. If unsure, pick **Google Colab**
-(nothing to install).
+Decide only *how* you want to run the lessons; see
+[How to run](#how-to-run-the-lessons). If unsure, pick Google Colab (nothing to
+install).
 
 ---
 
-## 📅 Logistics
+## Logistics
 
 | | |
 |---|---|
@@ -62,17 +61,17 @@ Building 1.0. If you plan to use **DB Browser for SQLite** (Option B), install i
 
 ---
 
-## 🚀 How to run the lessons
+## How to run the lessons
 
-Pick whichever suits you. For absolute beginners, **Google Colab** needs nothing
+Pick whichever suits you. For absolute beginners, Google Colab needs nothing
 installed and keeps you consistent with the Python session.
 
 ### Option A — Google Colab (easiest, nothing to install)
 
-1. Make sure you have a **Google account**.
+1. Make sure you have a Google account.
 2. Click an **Open in Colab** button below.
-3. Run the **first cell** (Shift + Enter) — it installs the SQL tools and connects
-   to the database. When it prints **"Connected"**, run the cells top to bottom.
+3. Run the first cell (Shift + Enter). It installs the SQL tools and connects to
+   the database. When it prints "Connected", run the cells top to bottom.
 
 > If Colab shows *"not authored by Google"*, click **Run anyway**.
 
@@ -105,17 +104,17 @@ sqlite3 data/omics.db < sql/01_select_basics.sql
 
 ### How the lessons flow
 
-Lesson **00** gives the conceptual base (relational model, keys, what SQL is);
-lessons **01–06** build query skills one clause at a time; **07** combines them
-into complete, realistic analytical queries; **08** is the fill-in hands-on
-capstone; **09** is an optional bonus on creating/changing data. Total ~4 h
-(lessons 00–08). Every lesson opens with **learning objectives**, is full of
-runnable, commented queries, has **exercises with collapsible solutions**, and
-closes with a **recap**.
+Lesson 00 gives the conceptual base (relational model, keys, what SQL is). Lessons
+01–06 build query skills one clause at a time. Lesson 07 combines them into
+complete, realistic analytical queries. Lesson 08 is the fill-in hands-on
+capstone, and 09 is an optional bonus on creating and changing data. Total roughly
+4 hours (lessons 00–08). Every lesson opens with learning objectives, is full of
+runnable, commented queries, has exercises with collapsible solutions, and closes
+with a recap.
 
 ---
 
-## 🧬 The database (`data/omics.db`)
+## The database (`data/omics.db`)
 
 Four linked tables describing a microbial-ecology survey (6 sites, 36 samples,
 42 taxa, ~1,300 abundance records):
@@ -145,9 +144,9 @@ Four linked tables describing a microbial-ecology survey (6 sites, 36 samples,
 | `taxa` | taxon_id (TEXT), genus (TEXT), family (TEXT), phylum (TEXT), domain (TEXT) | PK: taxon_id |
 | `abundance` | sample_id (TEXT), taxon_id (TEXT), count (INTEGER) | PK: (sample_id, taxon_id) · FK → samples, taxa |
 
-Design: 3 environments (Soil / Freshwater / Sediment) × 2 treatments
+Design: 3 environments (Soil / Freshwater / Sediment) by 2 treatments
 (Control / Amended) across 6 sites. Each phylum has an environmental preference,
-some taxa respond to the treatment, and there is a pH gradient — so `GROUP BY` and
+some taxa respond to the treatment, and there is a pH gradient, so `GROUP BY` and
 `JOIN` recover genuine structure (Cyanobacteria dominate freshwater, methanogenic
 archaea dominate sediment, Acidobacteria dominate soil). A few `NULL`s let you
 practise `IS NULL`.
@@ -158,22 +157,22 @@ Regenerate the database and CSV exports at any time:
 
 ---
 
-## 🧰 Troubleshooting / FAQ
+## Troubleshooting / FAQ
 
 | Symptom | Fix |
 |---------|-----|
-| **`no such table: …`** | You skipped the **first cell** (Colab) — run it to connect. In DB Browser, make sure you opened `data/omics.db`. |
-| **`no such column: …`** | A typo or wrong case — column names are case-sensitive. Check the schema above or run `PRAGMA table_info(<table>);`. |
-| **`syntax error near …`** | A missing comma/keyword, or a missing `;`. Read the query slowly clause by clause (see lesson 00's *anatomy of a SELECT*). |
-| Colab: *"not authored by Google"* | Normal — click **Run anyway**. |
+| **`no such table: …`** | You skipped the first cell (Colab); run it to connect. In DB Browser, make sure you opened `data/omics.db`. |
+| **`no such column: …`** | A typo or wrong case. Column names are case-sensitive. Check the schema above or run `PRAGMA table_info(<table>);`. |
+| **`syntax error near …`** | A missing comma or keyword, or a missing `;`. Read the query slowly clause by clause (see lesson 00's *anatomy of a SELECT*). |
+| Colab: *"not authored by Google"* | Normal. Click **Run anyway**. |
 | I changed data by mistake (lesson 09) | The core tables are safe; lesson 09 uses a throwaway table. If needed, rebuild: `python data/build_database.py`. |
-| A query returns no rows | That is a valid result (an empty set) — your filter simply matched nothing. |
+| A query returns no rows | That is a valid result (an empty set). Your filter simply matched nothing. |
 
-*Nothing to memorise — the notebooks and scripts stay with you after the course.*
+Nothing to memorise; the notebooks and scripts stay with you after the course.
 
 ---
 
-## 🗂️ Repository structure
+## Repository structure
 
 ```
 ufz-summerschool-sql/
@@ -185,13 +184,13 @@ ufz-summerschool-sql/
 └── sql/         one .sql script per lesson (for DB Browser / sqlite3 CLI)
 ```
 
-## ✅ Requirements
+## Requirements
 
 - **Colab:** nothing — the first cell installs `jupysql`.
 - **Local Jupyter:** `pip install jupysql jupyterlab` (SQLite ships with Python).
 - **DB Browser for SQLite:** just the app (no Python).
 
-## 📄 License
+## License
 
 Teaching materials: **Creative Commons Attribution 3.0 (CC BY 3.0)** — see
 [LICENSE](LICENSE). The dataset is entirely **synthetic** (built by
