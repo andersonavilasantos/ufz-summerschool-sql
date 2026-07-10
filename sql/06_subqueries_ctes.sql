@@ -18,11 +18,13 @@ WHERE taxon_id IN (
     SELECT taxon_id FROM abundance GROUP BY taxon_id HAVING SUM(count) > 2000
 );
 
--- genera whose taxa are never rare-only: here, phyla NOT containing any 'big' taxon
-SELECT DISTINCT phylum FROM taxa
+-- the complement of the previous query: taxa that are NOT abundant overall
+-- (every taxon whose total reads never exceed 2000)
+SELECT genus, phylum FROM taxa
 WHERE taxon_id NOT IN (
     SELECT taxon_id FROM abundance GROUP BY taxon_id HAVING SUM(count) > 2000
-);
+)
+ORDER BY phylum, genus;
 
 SELECT environment, ROUND(AVG(total_reads)) AS mean_library_size
 FROM (
